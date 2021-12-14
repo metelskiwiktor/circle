@@ -3,10 +3,10 @@
 1.2 Wypakuj, przenieś folder do np. C:/jdk
 1.3 Uruchom cmd z prawami administratora, wpisz polecenie 'setx -m JAVA_HOME "C:\jdk\jdk-11.0.2"' wskazując folder z jdk
 1.4 Uruchom run-project.cmd, aplikacja powinna się uruchomić
-2) Stwórz projekt, pobierz credentials.json oraz podmień/wklej je w istniejący plik w tym folderze 'credentials.json'
-Krok 1. Enable Google Drive APIs oraz 2. Download Google drive project credentials:
-https://technicalsand.com/file-operations-in-google-drive-api-with-spring-boot/
-3) Skonfiguruj właściwości projektu w application.yaml według własnych preferencji:
+2) Stwórz projekt, pobierz credentials.json oraz podmień/wklej je w istniejący plik w folderze 'env/google'
+Instrukcja: https://technicalsand.com/file-operations-in-google-drive-api-with-spring-boot/
+(w krokach 1. Enable Google Drive APIs oraz 2. Download Google drive project credentials)
+3) Skonfiguruj właściwości projektu w src/main/resources/application.yaml według własnych preferencji:
 ----baza danych----
 project.env.db.backup-scheduler: true/false - czy ma się co zdefiniowany czas uruchamiać usługa tworząca backup bazy danych
 project.env.db.delete-after-backup: true/false - czy backup danych po wykonaniu wszystkich operacji (w tym wysłanie do google) ma się usunąć z plików lokalnych
