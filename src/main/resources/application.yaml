@@ -1,0 +1,46 @@
+project:
+  env:
+    db:
+      name: circle-database
+      location: env/database
+      backup-scheduler: false
+      delete-after-backup: true
+      cron-scheduler: "0 0 */1 * * *" #every hour
+    logs:
+      name: circle-app
+      location: env/logs
+      backup-scheduler: false
+      delete-after-backup: true
+      cron-scheduler: "0 0 */1 * * *"
+    google:
+      enabled: false
+      credentials-path: env/google/credentials.json
+    web:
+      start-browser: true
+      frontend-url: http://localhost:4200
+spring:
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:./${project.env.db.location}/${project.env.db.name}
+    username: h2admin
+    password: admin
+  jpa:
+    hibernate:
+      ddl-auto: update
+logging:
+  file:
+    name: ./${project.env.logs.location}/${project.env.logs.name}.log
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - logfile
+          - beans
+          - health
+          - metrics
+          - env
+server:
+  port: 8080

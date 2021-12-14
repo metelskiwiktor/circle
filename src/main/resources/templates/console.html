@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Circle backend</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        body {
+            background-color: #44736d;
+        }
+
+        #contestants {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 70%;
+            background-color: #e6faff;
+        }
+
+        #contestants td, #contestants th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #contestants tbody:nth-child(even) {
+            background-color: #c9e7e3;
+        }
+
+        #contestants tr:hover {
+            background-color: #ffffff;
+        }
+
+        #contestants th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<h1>Panel zarządzający aplikacją 'Circle'</h1>
+<button
+        th:data-url="'http://localhost:'+${port}+'/h2-console'"
+        onclick="window.open(this.getAttribute('data-url'))">Baza danych
+</button>
+<button
+        th:data-url="'http://localhost:'+${port}+'/actuator/logfile'"
+        onclick="window.open(this.getAttribute('data-url'))">Logi aplikacji
+</button>
+<button
+        th:data-url="'http://localhost:'+${port}+'/swagger-ui.html'"
+        onclick="window.open(this.getAttribute('data-url'))">Swagger UI
+</button>
+<button
+        th:data-url="'http://localhost:'+${port}+'/actuator/health'"
+        onclick="window.open(this.getAttribute('data-url'))">Status backendu
+</button>
+<button
+        th:data-url="'http://localhost:'+${port}+'/actuator'"
+        onclick="window.open(this.getAttribute('data-url'))">Linki Actuatora
+</button>
+<br><br>
+<div th:if="${contestants.size() == 0}">
+    <h3>Brak użytkowników do wyświetlenia</h3>
+</div>
+<div th:if="${contestants.size() > 0}">
+    <h3>Aktualni użytkownicy</h3>
+
+    <table id="contestants">
+        <tr>
+            <th>Identyfikator</th>
+            <th>Nazwa użytkownika</th>
+            <th>Nagroda</th>
+            <th>Status przyznania</th>
+        </tr>
+        <tbody th:each="contestant: ${contestants}">
+        <tr>
+            <td th:text="${contestant.id}"></td>
+            <td th:text="${contestant.nick}"></td>
+            <td th:text="${contestant.reward}"></td>
+            <td th:text="${contestant.rewarded}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
